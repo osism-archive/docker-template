@@ -22,7 +22,10 @@ RUN apt-get update \
         bash \
     && groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon \
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf \
+      /var/lib/apt/lists/* \
+      /var/tmp/*
 
 USER dragon
 WORKDIR /home/dragon
