@@ -13,15 +13,15 @@ USER root
 
 ADD files/run.sh /run.sh
 
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y \
+RUN apt update \
+    && apt upgrade -y \
+    && apt install -y \
         bash
 
 RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
 
-RUN apt-get clean \
+RUN apt clean \
     && rm -rf \
       /var/lib/apt/lists/* \
       /var/tmp/*
