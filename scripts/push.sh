@@ -11,10 +11,6 @@ set -x
 # REPOSITORY
 # VERSION
 
-# Set default values
-
-BUILD_OPTS=${BUILD_OPTS:-}
-
 # https://github.com/jenkinsci/docker/blob/master/update-official-library.sh
 version-from-dockerfile() {
     grep VERSION: Dockerfile | sed -e 's/.*:-\(.*\)}/\1/'
