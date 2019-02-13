@@ -24,7 +24,9 @@ RUN groupadd -g $GROUP_ID dragon \
 RUN apt clean \
     && rm -rf \
       /var/lib/apt/lists/* \
-      /var/tmp/*
+      /var/tmp/*  \
+      /usr/share/doc/* \
+      /usr/share/man/*
 
 USER dragon
 WORKDIR /home/dragon
