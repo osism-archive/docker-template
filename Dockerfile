@@ -22,6 +22,7 @@ RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
 
 RUN apt clean \
+    && apt autoremove -y \
     && rm -rf \
       /var/lib/apt/lists/* \
       /var/tmp/*  \
