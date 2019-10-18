@@ -11,20 +11,19 @@ ENV GROUP_ID ${GROUP_ID:-45000}
 
 USER root
 
-ADD files/run.sh /run.sh
+COPY files/run.sh /run.sh
 
-RUN apt update \
-    && apt upgrade -y \
-    && apt install -y \
-        bash
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        bash \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
 
-RUN apt clean \
-    && apt autoremove -y \
+RUN apt-get clean \
+    && apt-get autoremove -y \
     && rm -rf \
-      /var/lib/apt/lists/* \
       /var/tmp/*  \
       /usr/share/doc/* \
       /usr/share/man/*
