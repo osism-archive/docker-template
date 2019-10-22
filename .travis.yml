@@ -16,6 +16,7 @@ before_script:
 
 script:
   - bash scripts/build.sh
+  - bash scripts/security.sh
 
 after_success:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash scripts/push.sh; fi'
