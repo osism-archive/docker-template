@@ -17,6 +17,7 @@ before_script:
 script:
   - bash scripts/build.sh
   - bash scripts/security.sh
+  - bash scripts/analyze.sh
 
 after_success:
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then bash scripts/push.sh; fi'
