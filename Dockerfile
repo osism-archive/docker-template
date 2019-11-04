@@ -1,13 +1,12 @@
 FROM ubuntu:18.04
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
-ARG VERSION
-ENV VERSION ${VERSION:-latest}
+ARG VERSION=latest
+
+ARG USER_ID=45000
+ARG GROUP_ID=45000
 
 ENV DEBIAN_FRONTEND noninteractive
-
-ENV USER_ID ${USER_ID:-45000}
-ENV GROUP_ID ${GROUP_ID:-45000}
 
 USER root
 
