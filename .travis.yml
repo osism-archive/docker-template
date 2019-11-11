@@ -7,19 +7,24 @@ before_install:
 
 env:
   global:
+    - MAKEFLAGS="--environment-overrides --warn-undefined-variables"
     - REPOSITORY=osism/template
   matrix:
     - VERSION=latest
 
 before_script:
-  - bash scripts/lint.sh
+  - make lint
 
 script:
-  - bash scripts/build.sh
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then bash scripts/security.sh; fi'
+  - make build
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+    make security-scan;
+    fi
 
 after_success:
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then bash scripts/push.sh; fi'
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+    make publish;
+    fi
 
 notifications:
   irc:
