@@ -1,7 +1,4 @@
 FROM ubuntu:18.04
-LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
-
-ARG VERSION=latest
 
 ARG USER_ID=45000
 ARG GROUP_ID=45000
@@ -31,3 +28,9 @@ USER dragon
 WORKDIR /home/dragon
 
 CMD ["/run.sh"]
+
+LABEL "org.opencontainers.image.documentation"="https://docs.osism.io" \
+      "org.opencontainers.image.licenses"="ASL 2.0" \
+      "org.opencontainers.image.source"="https://github.com/osism/docker-template" \
+      "org.opencontainers.image.url"="https://www.osism.de" \
+      "org.opencontainers.image.vendor"="Betacloud Solutions GmbH"
