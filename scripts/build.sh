@@ -11,21 +11,16 @@ set -x
 
 # Set default values
 
+CREATED=$(date --rfc-3339=ns)
 BUILD_OPTS=${BUILD_OPTS:-}
-HASH_REPOSITORY=$(git rev-parse --short HEAD)
-
-# https://github.com/jenkinsci/docker/blob/master/update-official-library.sh
-version-from-dockerfile() {
-    grep VERSION: Dockerfile | sed -e 's/.*:-\(.*\)}/\1/'
-}
-
-if [[ -z $VERSION ]]; then
-    VERSION=$(version-from-dockerfile)
-fi
+REVISION=$(git rev-parse --short HEAD)
+VERSION=${VERSION:-latest}
 
 docker build \
     --build-arg "VERSION=$VERSION" \
-    --label "io.osism.${REPOSITORY#osism/}=$HASH_REPOSITORY" \
     --tag "$REPOSITORY:$VERSION" \
+    --label "org.opencontainers.image.created=$CREATED" \
+    --label "org.opencontainers.image.revision=$REVISION" \
+    --label "org.opencontainers.image.version=$VERSION" \
     --squash \
     $BUILD_OPTS .
