@@ -22,7 +22,8 @@ RUN apt-get clean \
     && rm -rf \
       /var/tmp/*  \
       /usr/share/doc/* \
-      /usr/share/man/*
+      /usr/share/man/* \
+    && echo > /var/log/lastlog
 
 USER dragon
 WORKDIR /home/dragon

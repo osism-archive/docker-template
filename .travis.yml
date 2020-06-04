@@ -16,6 +16,9 @@ before_script:
 
 script:
   - bash scripts/build.sh
+
+after_script:
+  - bash scripts/analyze.sh
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then bash scripts/security.sh; fi'
 
 deploy:
