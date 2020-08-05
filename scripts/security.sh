@@ -5,13 +5,13 @@
 # REPOSITORY
 # VERSION
 
-# https://github.com/jenkinsci/docker/blob/master/update-official-library.sh
-version-from-dockerfile() {
-    grep VERSION: Dockerfile | sed -e 's/.*:-\(.*\)}/\1/'
-}
+VERSION=${VERSION:-latest}
 
-if [[ -z $VERSION ]]; then
-    VERSION=$(version-from-dockerfile)
-fi
+sudo apt-get install wget apt-transport-https gnupg lsb-release
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy
 
-curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- "$REPOSITORY:$VERSION"
+trivy image --clear-cache
+trivy image $REPOSITORY:$VERSION
