@@ -1,0 +1,19 @@
+---
+name: Check docker syntax
+
+on:
+  push:
+    paths:
+      - .github/workflows/syntax-docker.yml
+      - Dockerfile
+  pull_request:
+    paths:
+      - .github/workflows/syntax-docker.yml
+      - Dockerfile
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brpaz/hadolint-action@master
