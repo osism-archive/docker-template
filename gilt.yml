@@ -1,9 +1,15 @@
 ---
-- git: https://github.com/osism/travis-master.git
+- git: https://github.com/osism/generics.git
   version: master
   files:
+    - src: github/*.yml
+      dst: .github/
     - src: github/workflows/*.yml
       dst: .github/workflows/
+    - src: github/cleanup.sh
+      dst: scripts/cleanup-github.sh
+    - src: docker/LICENSE
+      dst: ./LICENSE
     - src: docker/gilt.yml
       dst: ./gilt.yml
     - src: docker/.gitignore
@@ -26,3 +32,5 @@
         - python3 render-template.py .travis.yml
         - python3 render-template.py README.md
         - rm -f render-template.py
+        - bash scripts/cleanup-github.sh
+        - rm -f scripts/cleanup-github.sh

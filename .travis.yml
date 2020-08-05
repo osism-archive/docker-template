@@ -16,7 +16,6 @@ before_script:
 
 script:
   - bash scripts/build.sh
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then bash scripts/security.sh; fi'
 
 deploy:
   - provider: script
@@ -24,11 +23,3 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-
-notifications:
-  irc:
-    channels:
-      - "irc.freenode.org#osism"
-    template:
-      - "%{result} %{repository_slug}: %{commit_subject} %{build_url}"
-    skip_join: true
