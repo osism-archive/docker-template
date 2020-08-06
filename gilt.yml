@@ -24,6 +24,8 @@
       dst: ./scripts/build.sh
     - src: docker/scripts/lint.sh
       dst: ./scripts/lint.sh
+    - src: docker/scripts/security.sh
+      dst: ./scripts/security.sh
     - src: docker/scripts/travis.sh
       dst: ./scripts/travis.sh
     - src: docker/render-template.py
