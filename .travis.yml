@@ -11,6 +11,9 @@ env:
   matrix:
     - VERSION=latest
 
+before_script:
+  - bash scripts/lint.sh
+
 script:
   - bash scripts/build.sh
   - bash scripts/security.sh
